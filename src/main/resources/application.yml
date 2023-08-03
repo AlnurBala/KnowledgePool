@@ -1,0 +1,56 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
+      location: uploads/
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: Alnur09122001
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    root: info
+    properties:
+      hibernate:
+        default_schema: project
+  application:
+    name: liquibase
+  liquibase:
+    change-log: classpath:liquibase/changelog-master.xml
+    default-schema: project
+    enabled: true
+    database-change-log-table: TRANSACTION_DBLOG
+    database-change-log-lock-table: TRANSACTION_DBLOCK
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: balayevaltun@gmail.com
+    password: noghqtobxezsevsm
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  springdoc:
+    swagger-ui:
+      enabled: true
+
+shedLock:
+  shedTableName: website_schedule
+  checkTime: 0 00 13 * * *
+
+knowpool:
+  openapi:
+    dev-url: http://localhost:8080
+    prod-url: https://knowpool-api.com
+
+mail:
+  from: balayevaltun@gmail.com
+  to: alnurnurullayev@gmail.com
+  subject: This is subject
+  text: This is text
+
