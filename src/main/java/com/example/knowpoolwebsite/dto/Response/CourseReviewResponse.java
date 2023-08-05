@@ -4,6 +4,8 @@ import com.example.knowpoolwebsite.dto.CourseeResponse;
 import com.example.knowpoolwebsite.dto.UserrResponse;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,7 +14,7 @@ import lombok.*;
 public class CourseReviewResponse {
     private Integer reviewId;
     private String review;
-    private Integer rating;
+    private BigDecimal rating;
     private CourseeResponse course;
     private UserrResponse user;
 }

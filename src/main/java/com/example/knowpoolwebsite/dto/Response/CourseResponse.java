@@ -3,6 +3,7 @@ package com.example.knowpoolwebsite.dto.Response;
 import com.example.knowpoolwebsite.dto.*;
 import lombok.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @Getter
@@ -17,6 +18,7 @@ public class CourseResponse {
     private Integer duration;
     private Integer price;
     private String status;
+    private Date uploadDate;
     private List<EnrollmenttResponse> enrollments;
     private List<CourseReviewwResponse>courseReviews;
     private List<TransactionnResponse>transactions;

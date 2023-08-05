@@ -2,6 +2,8 @@ package com.example.knowpoolwebsite.dto;
 
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -10,5 +12,5 @@ import lombok.*;
 public class CourseReviewwResponse {
     private Integer reviewId;
     private String review;
-    private Integer rating;
+    private BigDecimal rating;
 }

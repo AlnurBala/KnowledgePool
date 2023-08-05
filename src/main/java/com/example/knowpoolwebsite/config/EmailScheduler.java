@@ -1,8 +1,6 @@
 package com.example.knowpoolwebsite.config;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,7 +16,7 @@ public class EmailScheduler {
 //    @Value("${mail.to}")
 //    private String to;
 
-    @Scheduled(cron = "0 12 12 * * *") // Send email every hour (in milliseconds)
+    @Scheduled(cron = "0 27 15 * * *") // Send email every hour (in milliseconds)
     public void sendEmail() {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(mailProperties.getFrom());

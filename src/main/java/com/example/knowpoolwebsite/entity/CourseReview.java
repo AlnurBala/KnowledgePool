@@ -3,6 +3,8 @@ package com.example.knowpoolwebsite.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 @Setter
@@ -17,7 +19,7 @@ public class CourseReview {
     @Column(name = "review")
     private String review;
     @Column(name = "rating")
-    private Integer rating;
+    private BigDecimal rating;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
     private Course course;

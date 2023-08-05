@@ -3,6 +3,7 @@ package com.example.knowpoolwebsite.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -40,6 +41,8 @@ public class Course {
     private Integer duration;
     @Column(name = "status")
     private String status;
+    @Column(name = "upload_date")
+    private Date uploadDate;
 
     @Column(name = "price")
     private Integer price;

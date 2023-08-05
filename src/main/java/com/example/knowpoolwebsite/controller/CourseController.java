@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,10 +70,12 @@ public class CourseController {
      * @return A list of CourseResponse containing matched course details.
      */
     @GetMapping("/criteria/{prefix}")
-    public List<CourseResponse> getCoursesByNameStartingWith(@PathVariable String prefix) {
-        return courseService.getCoursesByNameStartingWith(prefix);
+    public Page<CourseResponse> getCoursesByNameStartingWith(@PathVariable String prefix,
+                                                             @RequestParam(defaultValue = "0") Integer pageNumber,
+                                                             @RequestParam(defaultValue = "20") Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return courseService.getCoursesByNameStartingWith(prefix, pageable);
     }
-
     /**
      * Retrieves filtered courses based on the provided duration range.
      *
@@ -89,7 +92,13 @@ public class CourseController {
     ) {
         return courseService.getFilteredCoursesByDuration(minDuration, maxDuration, pageable);
     }
-
+    @GetMapping("/sort/date")
+    public Page<CourseResponse> getAllCoursesByUploadDateSorting(
+            @RequestParam(defaultValue = "0") Integer pageNumber,
+            @RequestParam(defaultValue = "10") Integer pageSize
+    ) {
+        return courseService.getAllCoursesByUploadDateSorting(pageNumber, pageSize);
+    }
     /**
      * Creates a new course based on the provided CourseRequest.
      *

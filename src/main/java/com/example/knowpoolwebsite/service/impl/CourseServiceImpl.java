@@ -6,7 +6,6 @@ import com.example.knowpoolwebsite.entity.Course;
 import com.example.knowpoolwebsite.mapper.CourseMapper;
 import com.example.knowpoolwebsite.repository.CourseCriteria;
 import com.example.knowpoolwebsite.repository.CourseRepository;
-import com.example.knowpoolwebsite.repository.DiscountRepository;
 import com.example.knowpoolwebsite.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,8 +14,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @Service
@@ -33,12 +30,6 @@ public class CourseServiceImpl implements CourseService {
     }
     @Override
     public Page<CourseResponse> getAllCoursesBySorting(Integer pageNumber, Integer pageSize,String sortProperty) {
-//        Pageable pageable=null;
-//        if(null!=sortProperty){
-//            pageable= PageRequest.of(pageNumber,pageSize, Sort.Direction.ASC,sortProperty);
-//        }else {
-//            pageable= PageRequest.of(pageNumber,pageSize, Sort.Direction.ASC,"title");
-//        }
         String defaultSortProperty = "title";
 
         // Check if sortProperty is null or empty, use the defaultSortProperty
@@ -52,20 +43,23 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<CourseResponse> getCoursesByNameStartingWith(String prefix) {
-        List<Course> courses = courseCriteria.getCoursesByNameStartingWith(prefix);
-        return courseMapper.toDTOs(courses);
+    public Page<CourseResponse> getCoursesByNameStartingWith(String prefix, Pageable pageable) {
+        Page<Course> courses = courseCriteria.getCoursesByNameStartingWith(prefix, pageable);
+        return courses.map(courseMapper::toDTO);
     }
     @Override
     public Page<CourseResponse> getFilteredCoursesByDuration(Integer minDuration, Integer maxDuration, Pageable pageable) {
         Page<Course> courses = courseCriteria.getFilteredCoursesByDuration(minDuration, maxDuration, pageable);
         return courses.map(courseMapper::toDTO);
     }
-//    @Override
-//    public List<CourseResponse> getFilteredCoursesByDuration(Integer minDuration, Integer maxDuration) {
-//        List<Course> courses = courseCriteria.getFilteredCoursesByDuration(minDuration, maxDuration);
-//        return courseMapper.toDTOs(courses);
-//    }
+
+    @Override
+    public Page<CourseResponse> getAllCoursesByUploadDateSorting(Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("uploadDate").descending());
+
+        var courseEntity = courseRepository.findAll(pageable);
+        return courseMapper.toDTOp(courseEntity);
+    }
 
     @Override
     public CourseResponse createCourse(CourseRequest courseRequest) {

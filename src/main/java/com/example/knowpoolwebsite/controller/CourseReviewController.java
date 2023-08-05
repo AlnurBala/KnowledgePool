@@ -1,9 +1,11 @@
 package com.example.knowpoolwebsite.controller;
 
+import com.example.knowpoolwebsite.annotation.ValidRating;
 import com.example.knowpoolwebsite.dto.Request.CourseReviewRequest;
 import com.example.knowpoolwebsite.dto.Response.CourseReviewResponse;
 import com.example.knowpoolwebsite.service.CourseReviewService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +24,7 @@ public class CourseReviewController {
     }
 
     @PostMapping
-    public CourseReviewResponse createCourseReview(@RequestBody CourseReviewRequest courseReviewRequest) {
+    public CourseReviewResponse createCourseReview(@RequestBody @ValidRating CourseReviewRequest courseReviewRequest) {
         return courseReviewService.createCourseReview(courseReviewRequest);
     }
     @PutMapping("/{id}")

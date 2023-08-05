@@ -2,6 +2,8 @@ package com.example.knowpoolwebsite.dto.Request;
 
 import lombok.*;
 
+import java.sql.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,4 +16,5 @@ public class CourseRequest {
     private Integer duration;
     private Integer price;
     private String status;
+    private Date uploadDate;
 }
