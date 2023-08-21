@@ -9,6 +9,7 @@ import com.matrix.knowpoolwebsite.service.DiscountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import java.util.List;
 
@@ -18,23 +19,28 @@ import java.util.List;
 public class DiscountServiceImpl implements DiscountService {
     private final DiscountRepository discountRepository;
     private final DiscountMapper discountMapper;
+
     @Override
     public List<DiscountResponseDto> getAllDiscounts() {
-        var discountEntity=discountRepository.findAll();
+        log.info("Fetching all discounts");
+        var discountEntity = discountRepository.findAll();
         return discountMapper.toDTOs(discountEntity);
     }
+
     @Override
     public DiscountResponseDto updateDiscount(Integer id, DiscountRequest discountRequest) {
+        log.info("Updating discount with ID {}: {}", id, discountRequest);
         var newDiscount = discountRepository.findById(id).orElse(new Discount());
         discountMapper.mapUpdateRequestToEntity(newDiscount, discountRequest);
-        discountRepository.save(newDiscount);
+        newDiscount = discountRepository.save(newDiscount);
         return discountMapper.toDTO(newDiscount);
     }
 
     @Override
     public DiscountResponseDto createDiscount(DiscountRequest discountRequest) {
-        var discountEntity=discountMapper.fromDTO(discountRequest);
-        discountEntity=discountRepository.save(discountEntity);
+        log.info("Creating new discount: {}", discountRequest);
+        var discountEntity = discountMapper.fromDTO(discountRequest);
+        discountEntity = discountRepository.save(discountEntity);
         return discountMapper.toDTO(discountEntity);
     }
 }

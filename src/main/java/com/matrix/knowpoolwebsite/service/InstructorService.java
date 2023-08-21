@@ -9,6 +9,7 @@ public interface InstructorService {
     List<InstructorResponseDto> getAllInstructors();
 
     InstructorResponseDto createInstructor(InstructorRequest instructorRequest);
+
     InstructorResponseDto updateInstructor(Integer id, InstructorRequest instructorRequest);
 
     void deleteInstructor(Integer id);

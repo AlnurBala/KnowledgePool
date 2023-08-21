@@ -9,7 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface CourseRepository extends JpaRepository<Course, Integer> {
-    List<Course>findByStatus(String status);
+    List<Course> findByStatus(String status);
+
     @Query(value = "select c from Course c")
     Page<Course> findAllPageable(Pageable pageable);
 }

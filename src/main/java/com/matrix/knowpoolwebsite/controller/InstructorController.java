@@ -5,6 +5,7 @@ import com.matrix.knowpoolwebsite.dto.response.InstructorResponseDto;
 import com.matrix.knowpoolwebsite.service.InstructorService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/v1/instructor")
 @RequiredArgsConstructor
 @SecurityRequirement(name = "jwt")
-@Tag(name = "Instructor",description = "Instructor Management APIs")
+@Tag(name = "Instructor", description = "Instructor Management APIs")
 public class InstructorController {
     private final InstructorService instructorService;
 
@@ -25,12 +26,13 @@ public class InstructorController {
     }
 
     @PostMapping
-    public InstructorResponseDto createInstructor(@RequestBody InstructorRequest instructorRequest) {
+    public InstructorResponseDto createInstructor(@RequestBody @Valid InstructorRequest instructorRequest) {
         return instructorService.createInstructor(instructorRequest);
     }
+
     @PutMapping("/{id}")
-    public InstructorResponseDto updateInstructor(@PathVariable Integer id, @RequestBody InstructorRequest instructorRequest){
-        return instructorService.updateInstructor(id,instructorRequest);
+    public InstructorResponseDto updateInstructor(@PathVariable Integer id, @RequestBody InstructorRequest instructorRequest) {
+        return instructorService.updateInstructor(id, instructorRequest);
     }
 
     @DeleteMapping("/delete/{id}")

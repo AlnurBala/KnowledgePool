@@ -17,7 +17,7 @@ public class Discount {
     @Id
     @Column(name = "discount_id")
     private Integer discountId;
-    @Column(name = "discount_percentage",precision = 5,scale = 2)
+    @Column(name = "discount_percentage", precision = 5, scale = 2)
     private BigDecimal discountPercentage;
     @Column(name = "start_date")
     private Date startDate;

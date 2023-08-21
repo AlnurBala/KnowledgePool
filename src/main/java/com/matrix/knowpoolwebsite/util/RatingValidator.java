@@ -14,7 +14,7 @@ public class RatingValidator implements ConstraintValidator<ValidRating, BigDeci
     @Override
     public boolean isValid(BigDecimal rating, ConstraintValidatorContext context) {
         if (rating == null) {
-            return true; // Null values are considered valid
+            return true;
         }
         return rating.compareTo(MIN_RATING) >= 0 &&
                 rating.compareTo(MAX_RATING) <= 0 &&

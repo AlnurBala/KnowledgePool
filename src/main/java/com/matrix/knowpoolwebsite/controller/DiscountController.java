@@ -5,16 +5,17 @@ import com.matrix.knowpoolwebsite.dto.response.DiscountResponseDto;
 import com.matrix.knowpoolwebsite.service.DiscountService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/discount")
+@RequestMapping("/api/v1/discount")
 @RequiredArgsConstructor
 @SecurityRequirement(name = "jwt")
-@Tag(name = "Discount",description = "Discount Management APIs")
+@Tag(name = "Discount", description = "Discount Management APIs")
 public class DiscountController {
     private final DiscountService discountService;
 
@@ -30,7 +31,7 @@ public class DiscountController {
     }
 
     @PostMapping
-    public DiscountResponseDto createDiscount(@RequestBody DiscountRequest discountRequest) {
+    public DiscountResponseDto createDiscount(@RequestBody @Valid DiscountRequest discountRequest) {
         return discountService.createDiscount(discountRequest);
     }
 

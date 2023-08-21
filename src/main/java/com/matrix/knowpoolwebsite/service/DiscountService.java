@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface DiscountService {
     List<DiscountResponseDto> getAllDiscounts();
+
     DiscountResponseDto updateDiscount(Integer id, DiscountRequest discountRequest);
 
     DiscountResponseDto createDiscount(DiscountRequest discountRequest);

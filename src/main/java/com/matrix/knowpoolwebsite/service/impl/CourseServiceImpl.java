@@ -23,19 +23,20 @@ public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;
     private final CourseMapper courseMapper;
     private final CourseCriteria courseCriteria;
+
     @Override
     public Page<CourseResponseDto> getAllCourses(Pageable pageable) {
+        log.info("Fetching all courses");
         var courseEntity = courseRepository.findAllPageable(pageable);
         return courseMapper.toDTOp(courseEntity);
     }
+
     @Override
     public Page<CourseResponseDto> getAllCoursesBySorting(Integer pageNumber, Integer pageSize, String sortProperty) {
+        log.info("Fetching all courses by sorting");
         String defaultSortProperty = "title";
-
-        // Check if sortProperty is null or empty, use the defaultSortProperty
         String actualSortProperty = (sortProperty != null && !sortProperty.isEmpty()) ? sortProperty : defaultSortProperty;
-        log.info("Actual sort property: {}", actualSortProperty);
-        // Create the Pageable with sorting based on the actualSortProperty
+        log.debug("Actual sort property: {}", actualSortProperty);
         Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(actualSortProperty).ascending());
 
         var courseEntity = courseRepository.findAll(pageable);
@@ -44,17 +45,21 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Page<CourseResponseDto> getCoursesByNameStartingWith(String prefix, Pageable pageable) {
+        log.info("Fetching courses by name starting with: {}", prefix);
         Page<Course> courses = courseCriteria.getCoursesByNameStartingWith(prefix, pageable);
         return courses.map(courseMapper::toDTO);
     }
+
     @Override
     public Page<CourseResponseDto> getFilteredCoursesByDuration(Integer minDuration, Integer maxDuration, Pageable pageable) {
+        log.info("Fetching filtered courses by duration ({} - {})", minDuration, maxDuration);
         Page<Course> courses = courseCriteria.getFilteredCoursesByDuration(minDuration, maxDuration, pageable);
         return courses.map(courseMapper::toDTO);
     }
 
     @Override
     public Page<CourseResponseDto> getAllCoursesByUploadDateSorting(Integer pageNumber, Integer pageSize) {
+        log.info("Fetching all courses by upload date sorting");
         Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("uploadDate").descending());
 
         var courseEntity = courseRepository.findAll(pageable);
@@ -63,6 +68,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public CourseResponseDto createCourse(CourseRequest courseRequest) {
+        log.info("Creating new course: {}", courseRequest);
         var courseEntity = courseMapper.fromDTO(courseRequest);
         courseEntity.setStatus("NEW");
         courseEntity = courseRepository.save(courseEntity);
@@ -71,14 +77,16 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public CourseResponseDto updateCourse(Integer id, CourseRequest courseRequest) {
+        log.info("Updating course with ID {}: {}", id, courseRequest);
         var newCourse = courseRepository.findById(id).orElse(new Course());
         courseMapper.mapUpdateRequestToEntity(newCourse, courseRequest);
-        courseRepository.save(newCourse);
+        newCourse = courseRepository.save(newCourse);
         return courseMapper.toDTO(newCourse);
     }
 
     @Override
     public void deleteCourse(Integer id) {
+        log.info("Deleting course with ID: {}", id);
         courseRepository.deleteById(id);
     }
 }

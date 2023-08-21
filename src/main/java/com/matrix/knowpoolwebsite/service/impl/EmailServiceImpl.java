@@ -18,6 +18,7 @@ public class EmailServiceImpl {
     private final UserRepository userRepository;
     private final JavaMailSender javaMailSender;
     private final MailProperties mailProperties;
+
     public void sendEmailToUsers() {
         List<User> users = userRepository.findAll();
 

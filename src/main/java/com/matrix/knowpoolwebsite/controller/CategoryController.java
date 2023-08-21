@@ -13,16 +13,12 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/api/v1/category")
 @RequiredArgsConstructor
-@Tag(name = "Category",description = "Category Management APIs")
+@Tag(name = "Category", description = "Category Management APIs")
 public class CategoryController {
     private final CategoryService categoryService;
 
-    /**
-     *
-     * @return
-     */
     @GetMapping
     public List<CategoryResponseDto> getAllCategories() {
         return categoryService.getAllCategories();
@@ -31,9 +27,8 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<CategoryResponseDto> createCategory(@RequestBody CategoryRequest categoryRequest) {
         return new ResponseEntity<>(categoryService.createCategory(categoryRequest), HttpStatus.CREATED);
-
-       // return ResponseEntity.of(Optional.of( categoryService.createCategory(categoryRequest)));
     }
+
     @PutMapping("{id}")
     public CategoryResponseDto updateCategory(@PathVariable Integer id, @RequestBody CategoryRequest categoryRequest) {
         return categoryService.updateCategory(id, categoryRequest);

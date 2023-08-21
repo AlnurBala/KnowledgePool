@@ -9,6 +9,7 @@ public interface TransactionService {
     List<TransactionResponseDto> getAllTransactions();
 
     TransactionResponseDto createTransaction(TransactionRequest transactionRequest);
+
     TransactionResponseDto updateTransaction(Integer id, TransactionRequest transactionRequest);
 
     void deleteTransaction(Integer id);

@@ -9,6 +9,7 @@ public interface CategoryService {
     List<CategoryResponseDto> getAllCategories();
 
     CategoryResponseDto createCategory(CategoryRequest categoryRequest);
+
     CategoryResponseDto updateCategory(Integer id, CategoryRequest categoryRequest);
 
     void deleteCategory(Integer id);

@@ -1,10 +1,10 @@
 package com.matrix.knowpoolwebsite.service.impl;
 
-import com.matrix.knowpoolwebsite.enumeration.Role;
 import com.matrix.knowpoolwebsite.dto.request.AuthenticationRequest;
 import com.matrix.knowpoolwebsite.dto.request.RegisterRequest;
 import com.matrix.knowpoolwebsite.dto.response.AuthenticationResponseDto;
 import com.matrix.knowpoolwebsite.entity.User;
+import com.matrix.knowpoolwebsite.enumeration.Role;
 import com.matrix.knowpoolwebsite.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,15 +21,16 @@ public class AuthenticationServiceImpl {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponseDto register(RegisterRequest request) {
-        var user= User.builder()
+        var user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .emailAddress(request.getEmailAddress())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .paymentDetails(request.getPaymentDetails())
                 .role(request.getRoles().isEmpty() ? Role.USER : request.getRoles().iterator().next())
                 .build();
         repository.save(user);
-        var jwtToken=jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponseDto.builder()
                 .token(jwtToken)
                 .build();
@@ -42,8 +43,8 @@ public class AuthenticationServiceImpl {
                         request.getPassword()
                 )
         );
-        var user=repository.findByEmailAddress(request.getEmailAddress()).orElseThrow();
-        var jwtToken=jwtService.generateToken(user);
+        var user = repository.findByEmailAddress(request.getEmailAddress()).orElseThrow();
+        var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponseDto.builder()
                 .token(jwtToken)
                 .build();

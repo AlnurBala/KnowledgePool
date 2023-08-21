@@ -17,6 +17,7 @@ public interface InstructorMapper {
     InstructorResponseDto toDTO(Instructor instructor);
 
     List<InstructorResponseDto> toDTOs(List<Instructor> instructors);
+
     Instructor mapUpdateRequestToEntity(@MappingTarget Instructor instructor, InstructorRequest instructorRequest);
 
 }

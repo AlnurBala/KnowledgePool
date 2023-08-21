@@ -17,6 +17,7 @@ public interface CourseReviewMapper {
     CourseReviewResponseDto toDTO(CourseReview courseReview);
 
     List<CourseReviewResponseDto> toDTOs(List<CourseReview> courseReviews);
+
     CourseReview mapUpdateRequestToEntity(@MappingTarget CourseReview courseReview, CourseReviewRequest courseReviewRequest);
 
 }

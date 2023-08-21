@@ -28,7 +28,7 @@ public class CourseCriteria {
         List<Predicate> predicates = new ArrayList<>();
 
         if (prefix != null) {
-            String lowerCasePrefix = prefix.toLowerCase(); // Convert to lowercase
+            String lowerCasePrefix = prefix.toLowerCase();
             predicates.add(criteriaBuilder.like(criteriaBuilder.lower(courseRoot.get("title")), lowerCasePrefix + "%"));
         }
 
@@ -41,6 +41,7 @@ public class CourseCriteria {
         List<Course> courses = query.getResultList();
         return new PageImpl<>(courses, pageable, courses.size());
     }
+
     public Page<Course> getFilteredCoursesByDuration(Integer minDuration, Integer maxDuration, Pageable pageable) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Course> criteriaQuery = criteriaBuilder.createQuery(Course.class);

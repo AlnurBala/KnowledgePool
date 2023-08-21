@@ -17,5 +17,6 @@ public interface UserMapper {
     UserResponseDto toDTO(User user);
 
     List<UserResponseDto> toDTOs(List<User> users);
+
     User mapUpdateRequestToEntity(@MappingTarget User user, UserRequest userRequest);
 }

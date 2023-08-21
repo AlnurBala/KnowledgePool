@@ -12,15 +12,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CourseScheduleServiceImpl implements CourseScheduleService {
     private final CourseRepository courseRepository;
+
     @Override
     public List<Course> getCourseByStatus() {
         return courseRepository.findByStatus("NEW");
     }
+
     @Override
     public Course createCourse(Course course) {
         course.setStatus("NEW");
         return courseRepository.save(course);
     }
+
     @Override
     public void updateCourseStatus(Course course) {
         course.setStatus("UPDATED");

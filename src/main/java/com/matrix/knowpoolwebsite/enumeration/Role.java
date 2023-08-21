@@ -31,9 +31,7 @@ public enum Role {
                     Permission.INSTRUCTOR_DELETE,
                     Permission.INSTRUCTOR_CREATE
             )
-    )
-
-    ;
+    );
 
     @Getter
     private final Set<Permission> permissions;

@@ -21,19 +21,23 @@ public class CourseReviewServiceImpl implements CourseReviewService {
 
     @Override
     public List<CourseReviewResponseDto> getAllCourseReviews() {
+        log.debug("Getting all course reviews");
         var courseReviewEntities = courseReviewRepository.findAll();
         return courseReviewMapper.toDTOs(courseReviewEntities);
     }
+
     @Override
     public CourseReviewResponseDto updateCourseReview(Integer id, CourseReviewRequest courseReviewRequest) {
+        log.info("Updating course review with ID {}: {}", id, courseReviewRequest);
         var newCourseReview = courseReviewRepository.findById(id).orElse(new CourseReview());
         courseReviewMapper.mapUpdateRequestToEntity(newCourseReview, courseReviewRequest);
-        courseReviewRepository.save(newCourseReview);
+        newCourseReview = courseReviewRepository.save(newCourseReview);
         return courseReviewMapper.toDTO(newCourseReview);
     }
 
     @Override
     public CourseReviewResponseDto createCourseReview(CourseReviewRequest courseReviewRequest) {
+        log.debug("Creating new course review: {}", courseReviewRequest);
         var courseReviewEntity = courseReviewMapper.fromDTO(courseReviewRequest);
         courseReviewEntity = courseReviewRepository.save(courseReviewEntity);
         return courseReviewMapper.toDTO(courseReviewEntity);
@@ -41,6 +45,12 @@ public class CourseReviewServiceImpl implements CourseReviewService {
 
     @Override
     public void deleteCourseReview(Integer id) {
-        courseReviewRepository.deleteById(id);
+        log.info("Deleting course review with ID {}", id);
+        try {
+            courseReviewRepository.deleteById(id);
+            log.info("Course review with ID {} deleted successfully", id);
+        } catch (Exception e) {
+            log.error("Error occurred while deleting course review with ID {}: {}", id, e.getMessage());
+        }
     }
 }

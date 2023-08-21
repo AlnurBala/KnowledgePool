@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,27 +22,36 @@ public class InstructorServiceImpl implements InstructorService {
 
     @Override
     public List<InstructorResponseDto> getAllInstructors() {
+        log.info("Getting all instructors");
         var instructorEntity = instructorRepository.findAll();
         return instructorMapper.toDTOs(instructorEntity);
     }
 
     @Override
     public InstructorResponseDto createInstructor(InstructorRequest instructorRequest) {
+        log.info("Creating new instructor: {}", instructorRequest);
         var instructorEntity = instructorMapper.fromDTO(instructorRequest);
         instructorEntity = instructorRepository.save(instructorEntity);
         return instructorMapper.toDTO(instructorEntity);
     }
+
     @Override
     public InstructorResponseDto updateInstructor(Integer id, InstructorRequest instructorRequest) {
-        var newInstructor = instructorRepository.findById(id).orElse(new Instructor());
+        log.info("Updating instructor with ID {}: {}", id, instructorRequest);
+        Optional<Instructor> instructorOptional = instructorRepository.findById(id);
+        if (!instructorOptional.isPresent()) {
+            log.error("Instructor with ID {} not found for update", id);
+            return null;
+        }
+        Instructor newInstructor = instructorOptional.get();
         instructorMapper.mapUpdateRequestToEntity(newInstructor, instructorRequest);
-        instructorRepository.save(newInstructor);
+        newInstructor = instructorRepository.save(newInstructor);
         return instructorMapper.toDTO(newInstructor);
     }
 
-
     @Override
     public void deleteInstructor(Integer id) {
+        log.info("Deleting instructor with ID {}", id);
         instructorRepository.deleteById(id);
     }
 }

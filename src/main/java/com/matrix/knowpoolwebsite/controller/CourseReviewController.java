@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/course_review")
 @RequiredArgsConstructor
-@Tag(name = "Course Review",description = "Course Review Management APIs")
+@Tag(name = "Course Review", description = "Course Review Management APIs")
 public class CourseReviewController {
     private final CourseReviewService courseReviewService;
 
@@ -29,6 +29,7 @@ public class CourseReviewController {
     public CourseReviewResponseDto createCourseReview(@RequestBody @ValidRating CourseReviewRequest courseReviewRequest) {
         return courseReviewService.createCourseReview(courseReviewRequest);
     }
+
     @PutMapping("/{id}")
     @SecurityRequirement(name = "jwt")
     public CourseReviewResponseDto updateCourseReview(@PathVariable Integer id, @RequestBody CourseReviewRequest courseReviewRequest) {

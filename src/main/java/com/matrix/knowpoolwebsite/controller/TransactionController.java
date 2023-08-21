@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/transaction")
+@RequestMapping("/api/v1/transaction")
 @RequiredArgsConstructor
 @SecurityRequirement(name = "jwt")
-@Tag(name = "Transaction",description = "Transaction Management APIs")
+@Tag(name = "Transaction", description = "Transaction Management APIs")
 public class TransactionController {
     private final TransactionService transactionService;
 
@@ -27,8 +27,9 @@ public class TransactionController {
     public TransactionResponseDto createTransaction(@RequestBody TransactionRequest transactionRequest) {
         return transactionService.createTransaction(transactionRequest);
     }
+
     @PutMapping("/{id}")
-    public TransactionResponseDto updateTransaction(@PathVariable Integer id, @RequestBody TransactionRequest transactionRequest){
+    public TransactionResponseDto updateTransaction(@PathVariable Integer id, @RequestBody TransactionRequest transactionRequest) {
         return transactionService.updateTransaction(id, transactionRequest);
     }
 

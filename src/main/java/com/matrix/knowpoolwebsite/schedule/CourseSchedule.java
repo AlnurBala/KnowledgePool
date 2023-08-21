@@ -13,12 +13,13 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class CourseSchedule {
     private final CourseScheduleService courseScheduleService;
+
     @SchedulerLock(name = "checkTime")
     @Scheduled(fixedDelay = 100000)
     public void checkCourseStatus() {
         System.out.println("schedule start");
         var courses = courseScheduleService.getCourseByStatus();
-        for (Course course:courses) {
+        for (Course course : courses) {
             courseScheduleService.updateCourseStatus(course);
         }
         System.out.println("schedule END");

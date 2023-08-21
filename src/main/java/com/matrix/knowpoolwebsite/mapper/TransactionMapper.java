@@ -17,6 +17,7 @@ public interface TransactionMapper {
     TransactionResponseDto toDTO(Transaction transaction);
 
     List<TransactionResponseDto> toDTOs(List<Transaction> transactions);
+
     Transaction mapUpdateRequestToEntity(@MappingTarget Transaction transaction, TransactionRequest transactionRequest);
 
 }

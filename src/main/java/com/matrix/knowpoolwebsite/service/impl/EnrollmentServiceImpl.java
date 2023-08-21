@@ -21,26 +21,35 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
     @Override
     public List<EnrollmentResponseDto> getAllEnrollments() {
+        log.info("Getting all enrollments");
         var enrollmentEntity = enrollmentRepository.findAll();
+        log.debug("Retrieved {} enrollments", enrollmentEntity.size());
         return enrollmentMapper.toDTOs(enrollmentEntity);
     }
+
     @Override
     public EnrollmentResponseDto updateEnrollment(Integer id, EnrollmentRequest enrollmentRequest) {
+        log.info("Updating enrollment with id: {}", id);
         var newEnrollment = enrollmentRepository.findById(id).orElse(new Enrollment());
         enrollmentMapper.mapUpdateRequestToEntity(newEnrollment, enrollmentRequest);
         enrollmentRepository.save(newEnrollment);
+        log.info("Enrollment with id {} updated", id);
         return enrollmentMapper.toDTO(newEnrollment);
     }
 
     @Override
     public EnrollmentResponseDto createEnrollment(EnrollmentRequest enrollmentRequest) {
+        log.info("Creating a new enrollment");
         var enrollmentEntity = enrollmentMapper.fromDTO(enrollmentRequest);
         enrollmentEntity = enrollmentRepository.save(enrollmentEntity);
+        log.info("New enrollment created with id: {}", enrollmentEntity.getEnrollmentId());
         return enrollmentMapper.toDTO(enrollmentEntity);
     }
 
     @Override
     public void deleteEnrollment(Integer id) {
+        log.info("Deleting enrollment with id: {}", id);
         enrollmentRepository.deleteById(id);
+        log.info("Enrollment with id {} deleted", id);
     }
 }

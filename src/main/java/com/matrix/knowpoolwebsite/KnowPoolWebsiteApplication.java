@@ -24,6 +24,7 @@ public class KnowPoolWebsiteApplication {
     public static void main(String[] args) {
         SpringApplication.run(KnowPoolWebsiteApplication.class, args);
     }
+
     @Bean
     public CommandLineRunner commandLineRunner(
             AuthenticationServiceImpl service

@@ -9,6 +9,7 @@ public interface EnrollmentService {
     List<EnrollmentResponseDto> getAllEnrollments();
 
     EnrollmentResponseDto createEnrollment(EnrollmentRequest enrollmentRequest);
+
     EnrollmentResponseDto updateEnrollment(Integer id, EnrollmentRequest enrollmentRequest);
 
     void deleteEnrollment(Integer id);

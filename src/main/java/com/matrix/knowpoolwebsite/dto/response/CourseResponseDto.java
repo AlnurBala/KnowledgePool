@@ -1,7 +1,6 @@
 package com.matrix.knowpoolwebsite.dto.response;
 
 import com.matrix.knowpoolwebsite.dto.*;
-import com.matrix.knowpoolwebsite.dto.CategoryResponse;
 import lombok.*;
 
 import java.sql.Date;
@@ -21,8 +20,8 @@ public class CourseResponseDto {
     private String status;
     private Date uploadDate;
     private List<EnrollmentResponse> enrollments;
-    private List<CourseReviewResponse>courseReviews;
-    private List<TransactionResponse>transactions;
+    private List<CourseReviewResponse> courseReviews;
+    private List<TransactionResponse> transactions;
     private List<DiscountResponse> discounts;
     private CategoryResponse category;
 }

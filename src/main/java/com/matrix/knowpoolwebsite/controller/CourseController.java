@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -19,7 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/course")
+@RequestMapping("/api/v1/course")
 @RequiredArgsConstructor
 @SecurityRequirement(name = "jwt")
 @Tag(name = "Course", description = "Course Management APIs")
@@ -77,6 +78,7 @@ public class CourseController {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         return courseService.getCoursesByNameStartingWith(prefix, pageable);
     }
+
     /**
      * Retrieves filtered courses based on the provided duration range.
      *
@@ -93,6 +95,7 @@ public class CourseController {
     ) {
         return courseService.getFilteredCoursesByDuration(minDuration, maxDuration, pageable);
     }
+
     @GetMapping("/sort/date")
     public Page<CourseResponseDto> getAllCoursesByUploadDateSorting(
             @RequestParam(defaultValue = "0") Integer pageNumber,
@@ -100,6 +103,7 @@ public class CourseController {
     ) {
         return courseService.getAllCoursesByUploadDateSorting(pageNumber, pageSize);
     }
+
     /**
      * Creates a new course based on the provided CourseRequest.
      *
@@ -107,14 +111,14 @@ public class CourseController {
      * @return A CourseResponse containing the details of the created course.
      */
     @PostMapping
-    public CourseResponseDto createCourse(@RequestBody CourseRequest courseRequest) {
+    public CourseResponseDto createCourse(@RequestBody @Valid CourseRequest courseRequest) {
         return courseService.createCourse(courseRequest);
     }
 
     /**
      * Updates an existing course based on the provided CourseRequest and ID.
      *
-     * @param id           The ID of the course to be updated.
+     * @param id            The ID of the course to be updated.
      * @param courseRequest The CourseRequest object containing updated course details.
      * @return A CourseResponse containing the updated course details.
      */

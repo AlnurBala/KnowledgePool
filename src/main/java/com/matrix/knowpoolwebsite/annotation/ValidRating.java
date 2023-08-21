@@ -14,6 +14,8 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = RatingValidator.class)
 public @interface ValidRating {
     String message() default "Invalid rating. Rating must be between 0 and 5 with increments of 0.5";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

@@ -13,9 +13,7 @@ public enum Permission {
     INSTRUCTOR_READ("instructor:read"),
     INSTRUCTOR_UPDATE("instructor:update"),
     INSTRUCTOR_CREATE("instructor:create"),
-    INSTRUCTOR_DELETE("instructor:delete")
-
-    ;
+    INSTRUCTOR_DELETE("instructor:delete");
 
     @Getter
     private final String permission;

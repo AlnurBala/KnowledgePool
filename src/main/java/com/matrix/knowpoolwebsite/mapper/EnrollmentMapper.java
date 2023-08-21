@@ -17,6 +17,7 @@ public interface EnrollmentMapper {
     EnrollmentResponseDto toDTO(Enrollment enrollment);
 
     List<EnrollmentResponseDto> toDTOs(List<Enrollment> enrollments);
+
     Enrollment mapUpdateRequestToEntity(@MappingTarget Enrollment enrollment, EnrollmentRequest enrollmentRequest);
 
 }

@@ -20,7 +20,8 @@ public interface CourseMapper {
     CourseResponseDto toDTO(Course course);
 
     List<CourseResponseDto> toDTOs(List<Course> courses);
-    Course mapUpdateRequestToEntity(@MappingTarget Course course,CourseRequest courseRequest);
+
+    Course mapUpdateRequestToEntity(@MappingTarget Course course, CourseRequest courseRequest);
 
     default Page<CourseResponseDto> toDTOp(Page<Course> courses) {
         List<CourseResponseDto> courseResponseDtos = courses

@@ -13,12 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/file")
+@RequestMapping("/api/v1/file")
 @RequiredArgsConstructor
-@Tag(name = "File",description = "File Management APIs")
+@Tag(name = "File", description = "File Management APIs")
 public class FileController {
     private final FileServiceImpl fileService;
-
 
 
     @PostMapping("/upload")

@@ -5,16 +5,17 @@ import com.matrix.knowpoolwebsite.dto.response.EnrollmentResponseDto;
 import com.matrix.knowpoolwebsite.service.EnrollmentService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/enrollment")
+@RequestMapping("/api/v1/enrollment")
 @RequiredArgsConstructor
 @SecurityRequirement(name = "jwt")
-@Tag(name = "Enrollment",description = "Enrollment Management APIs")
+@Tag(name = "Enrollment", description = "Enrollment Management APIs")
 public class EnrollmentController {
     private final EnrollmentService enrollmentService;
 
@@ -24,9 +25,10 @@ public class EnrollmentController {
     }
 
     @PostMapping
-    public EnrollmentResponseDto createEnrollment(@RequestBody EnrollmentRequest enrollmentRequest) {
+    public EnrollmentResponseDto createEnrollment(@RequestBody @Valid EnrollmentRequest enrollmentRequest) {
         return enrollmentService.createEnrollment(enrollmentRequest);
     }
+
     @PutMapping("/{id}")
     public EnrollmentResponseDto updateEnrollment(@PathVariable Integer id, @RequestBody EnrollmentRequest enrollmentRequest) {
         return enrollmentService.updateEnrollment(id, enrollmentRequest);
