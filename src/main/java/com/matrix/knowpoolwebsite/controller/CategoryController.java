@@ -3,6 +3,7 @@ package com.matrix.knowpoolwebsite.controller;
 import com.matrix.knowpoolwebsite.dto.request.CategoryRequest;
 import com.matrix.knowpoolwebsite.dto.response.CategoryResponseDto;
 import com.matrix.knowpoolwebsite.service.CategoryService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/category")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "jwt")
 @Tag(name = "Category", description = "Category Management APIs")
 public class CategoryController {
     private final CategoryService categoryService;

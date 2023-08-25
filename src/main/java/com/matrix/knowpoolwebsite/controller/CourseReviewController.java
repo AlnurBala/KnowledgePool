@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/course_review")
+@RequestMapping("/api/v1/course_review")
 @RequiredArgsConstructor
 @Tag(name = "Course Review", description = "Course Review Management APIs")
 public class CourseReviewController {

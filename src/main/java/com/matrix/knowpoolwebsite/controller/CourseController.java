@@ -36,8 +36,8 @@ public class CourseController {
      */
     @Operation(
             summary = "Retrieve a Course",
-            description = "Get a Course object. The response is Course object with page parameters, title, description and published status.",
-            tags = {"courses", "get"})
+            description = "Get a Course object. The response is Course object with page parameters, title, description and published status."
+    )
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = Course.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())}),
@@ -56,7 +56,7 @@ public class CourseController {
      * @param sortProperty The property to sort the courses by.
      * @return A page of CourseResponse containing sorted course details.
      */
-    @GetMapping("/sort/{pageNumber}/{pageSize}/{sortProperty}")
+    @GetMapping("/sorting/{pageNumber}/{pageSize}/{sortProperty}")
     public Page<CourseResponseDto> getAllCoursesBySorting(@PathVariable Integer pageNumber,
                                                           @PathVariable Integer pageSize,
                                                           @PathVariable String sortProperty) {
@@ -71,7 +71,7 @@ public class CourseController {
      * @param prefix The prefix to match course names.
      * @return A list of CourseResponse containing matched course details.
      */
-    @GetMapping("/criteria/{prefix}")
+    @GetMapping("/criteria/name/{prefix}")
     public Page<CourseResponseDto> getCoursesByNameStartingWith(@PathVariable String prefix,
                                                                 @RequestParam(defaultValue = "0") Integer pageNumber,
                                                                 @RequestParam(defaultValue = "20") Integer pageSize) {
@@ -87,7 +87,7 @@ public class CourseController {
      * @param pageable    The pagination information.
      * @return A page of CourseResponse containing filtered course details.
      */
-    @GetMapping("/duration")
+    @GetMapping("/filtered/duration")
     public Page<CourseResponseDto> getFilteredCoursesByDuration(
             @RequestParam(required = false) Integer minDuration,
             @RequestParam(required = false) Integer maxDuration,
@@ -96,7 +96,7 @@ public class CourseController {
         return courseService.getFilteredCoursesByDuration(minDuration, maxDuration, pageable);
     }
 
-    @GetMapping("/sort/date")
+    @GetMapping("/sorting/date")
     public Page<CourseResponseDto> getAllCoursesByUploadDateSorting(
             @RequestParam(defaultValue = "0") Integer pageNumber,
             @RequestParam(defaultValue = "10") Integer pageSize
