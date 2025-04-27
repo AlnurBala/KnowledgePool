@@ -17,5 +17,4 @@ public class EnrollmentResponseDto {
     private Integer progress;
     private CourseResponse course;
     private UserResponse user;
-
 }

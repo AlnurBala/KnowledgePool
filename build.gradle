@@ -17,8 +17,9 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.projectlombok:lombok:1.18.22'
 	testImplementation 'junit:junit:4.13.1'
-    compileOnly 'org.projectlombok:lombok'
+	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation group: 'net.javacrumbs.shedlock', name: 'shedlock-spring', version: "$shedlockVersion"
 	implementation group: 'net.javacrumbs.shedlock', name: 'shedlock-provider-jdbc-template', version: "$shedlockVersion"
