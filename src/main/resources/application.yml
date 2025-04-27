@@ -53,3 +53,5 @@ mail:
   subject: Subject
   text: Text
 
+server:
+  port: ${PORT:8080}
