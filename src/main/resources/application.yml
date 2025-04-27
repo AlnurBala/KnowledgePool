@@ -15,12 +15,12 @@ spring:
     root: info
     properties:
       hibernate:
-        default_schema: project
+        default_schema: public
   application:
     name: liquibase
   liquibase:
     change-log: classpath:liquibase/changelog-master.xml
-    default-schema: project
+    default-schema: public
     enabled: true
     database-change-log-table: TRANSACTION_DBLOG
     database-change-log-lock-table: TRANSACTION_DBLOCK
