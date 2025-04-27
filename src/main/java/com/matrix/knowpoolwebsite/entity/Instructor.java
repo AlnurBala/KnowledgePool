@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "instructors", schema = "project")
+@Table(name = "instructors")
 public class Instructor {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

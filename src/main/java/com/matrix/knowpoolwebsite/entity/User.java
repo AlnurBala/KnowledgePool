@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "users", schema = "project")
+@Table(name = "users")
 public class User implements UserDetails {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "enrollments", schema = "project")
+@Table(name = "enrollments")
 public class Enrollment {
     @Id
     @Column(name = "enrollment_id")

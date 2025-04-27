@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "course_reviews", schema = "project")
+@Table(name = "course_reviews")
 public class CourseReview {
     @Id
     @Column(name = "review_id")

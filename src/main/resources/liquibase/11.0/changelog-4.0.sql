@@ -9,6 +9,6 @@ CREATE TABLE Courses
     price         INTEGER,
     instructor_id INTEGER,
     category_id   INTEGER,
-    FOREIGN KEY (instructor_id) REFERENCES project.instructors (instructor_id),
-    FOREIGN KEY (category_id) REFERENCES project.categories (category_id)
+    FOREIGN KEY (instructor_id) REFERENCES instructors (instructor_id),
+    FOREIGN KEY (category_id) REFERENCES categories (category_id)
 );

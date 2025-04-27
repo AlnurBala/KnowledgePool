@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "discounts", schema = "project")
+@Table(name = "discounts")
 public class Discount {
     @Id
     @Column(name = "discount_id")

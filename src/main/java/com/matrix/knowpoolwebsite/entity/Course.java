@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "courses", schema = "project")
+@Table(name = "courses")
 public class Course {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
